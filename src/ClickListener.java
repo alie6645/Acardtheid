@@ -21,5 +21,6 @@ public class ClickListener extends MouseAdapter {
         int x = e.getX();
         int y = e.getY();
         panel.click(x,y);
+        panel.repaint();
     }
 }
