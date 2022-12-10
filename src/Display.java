@@ -1,7 +1,8 @@
 import java.awt.*;
 
 public class Display {
-    Card display = new Card();
+    Card blank = new Card();
+    Card display = blank;
     int x = 600;
     int y = 0;
 

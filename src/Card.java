@@ -5,12 +5,13 @@ import java.awt.image.BufferedImage;
 public class Card {
     public static int height = 100;
     public static int width = 70;
-    public String type;
+    public String type = "fate";
     public int pCost=2;
     public int vCost=2;
     public String name = "empty";
     public boolean active = false;
     public BufferedImage img;
+    public String commands = "draw 1 end";
 
     public void draw(Graphics2D g2, int x, int y){
         if (active){
@@ -20,6 +21,12 @@ public class Card {
         g2.setColor(Color.white);
         g2.fillRect(x,y,width,height);
         g2.setColor(new Color(215,100,3));
+        if (type.equals("anc")){
+            g2.setColor(new Color(8,159,0));
+        }
+        if (type.equals("fate")){
+            g2.setColor(new Color(255,13,114));
+        }
         g2.fillRect(x,y,width,height/6);
         g2.fillRect(x,y+height*5/6,width,height/6);
         g2.setColor(Color.cyan);
@@ -31,6 +38,14 @@ public class Card {
             g2.fillOval(x+i*width/6,y+height*5/6,width/6,width/6);
         }
         g2.setColor(Color.black);
-        g2.drawString(name,x,y+height/7);
+        drawText(g2,name,x,y+height/7);
+    }
+
+    public void drawText(Graphics2D g2, String str, int x, int y){
+        int lineheight = g2.getFontMetrics().getHeight();
+        for (String line: str.split("\n")){
+            g2.drawString(line,x,y+=lineheight);
+        }
+
     }
 }

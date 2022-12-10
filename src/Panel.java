@@ -5,10 +5,12 @@ public class Panel extends JComponent {
     Player active;
     Card selected;
     Display display;
+    ActionHandler handler;
 
-    public Panel(Player player, Display display){
+    public Panel(Player player, Display display, ActionHandler handler){
         active = player;
         this.display = display;
+        this.handler = handler;
     }
 
     @Override
@@ -24,11 +26,12 @@ public class Panel extends JComponent {
         selected = active.setActive(x,y);
         if (selected != null) {
             display.setDisplay(selected);
+        } else {
+            display.setDisplay(display.blank);
         }
     }
 
     public void click(int x,int y){
-        active.load(new Card());
-        active.draw(1);
+        handler.play(active.getCard(x,y));
     }
 }

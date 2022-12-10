@@ -5,14 +5,20 @@ import java.util.Deque;
 import java.util.List;
 
 public class Player {
-    private int hp;
-    private List<Card> hand = new ArrayList<>();
-    private List<Card> discard = new ArrayList<>();
-    private Deque<Card> deck = new ArrayDeque(30);
+    int hp;
+    List<Card> hand = new ArrayList<>();
+    List<Card> discard = new ArrayList<>();
+    Deque<Card> deck = new ArrayDeque(30);
 
     public void draw(int cards){
         for (int i=0; i<cards; i++) {
             hand.add(deck.remove());
+        }
+    }
+
+    public void mill(int cards){
+        for (int i=0; i<cards; i++){
+            discard.add(deck.remove());
         }
     }
 
@@ -22,6 +28,14 @@ public class Player {
             for (int i = 0; i < hand.size(); i++) {
                 hand.get(i).draw(g2, i*spacing+50, 400);
             }
+        }
+        g2.setColor(Color.lightGray);
+        g2.fillRect(100,550,Card.width,Card.height);
+        g2.setColor(Color.black);
+        g2.drawString(String.valueOf(deck.size()),110,600);
+
+        if (discard.size() > 0){
+            discard.get(discard.size()-1).draw(g2,200,550);
         }
     }
 

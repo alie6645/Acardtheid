@@ -9,8 +9,8 @@ public class ClickListener extends MouseAdapter {
     }
     @Override
     public void mouseMoved(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+        int x = e.getX() - 8;
+        int y = e.getY() - 28;
         panel.setActiveCard(x,y);
         panel.repaint();
 
@@ -18,8 +18,8 @@ public class ClickListener extends MouseAdapter {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+        int x = e.getX() - 8;
+        int y = e.getY() - 28;
         panel.click(x,y);
         panel.repaint();
     }

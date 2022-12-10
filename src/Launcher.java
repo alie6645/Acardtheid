@@ -8,15 +8,15 @@ public class Launcher {
     public static void main(String[] args) throws IOException {
         JFrame frame = new JFrame();
         Player anc = new Player();
+        Player np = new Player();
         Display display = new Display();
-        for (int i=0; i<4; i++){
-            Card add = new Card();
-            add.name = String.valueOf(i);
-            add.img = ImageIO.read(new File("images/"+1+i+".png"));
-            anc.load(add);
+        CardLibrary library = new CardLibrary();
+        ActionHandler handler = new ActionHandler(anc, np);
+        for (Card card:library.anc){
+            anc.load(card);
         }
         anc.draw(4);
-        Panel panel = new Panel(anc, display);
+        Panel panel = new Panel(anc, display, handler);
         ClickListener listener = new ClickListener(panel);
 
         frame.add(panel);
